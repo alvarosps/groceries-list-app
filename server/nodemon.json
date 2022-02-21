@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER": "alvarosps",
+        "MONGO_PASSWORD": "xE4EXhJ8EbUEPjh",
+        "MONGO_DB": "groceriesListDB"
+    }
+}
