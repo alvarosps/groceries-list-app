@@ -15,12 +15,12 @@ const getGroceries = async (req: Request, res: Response): Promise<void> => {
 
 const addGrocery = async (req: Request, res: Response): Promise<void> => {
     try {
-        const body = req.body as Pick<IGrocery, "name" | "quantity" | "status">
-
+        const query = req.query as unknown as Pick<IGrocery, "name" | "quantity" | "status">
+        
         const grocery: IGrocery = new Grocery({
-            name: body.name,
-            quantity: body.quantity,
-            status: body.status,
+            name: query.name,
+            quantity: query.quantity,
+            status: query.status,
         })
 
         const newGrocery: IGrocery = await grocery.save()
@@ -40,12 +40,11 @@ const updateGrocery = async (req: Request, res: Response): Promise<void> => {
     try {
         const {
             params: { id },
-            body,
         } = req
-
+        
         const updateGrocery: IGrocery | null = await Grocery.findByIdAndUpdate(
             { _id: id },
-            body
+            req.query
         )
 
         const allGroceries: IGrocery[] = await Grocery.find()
